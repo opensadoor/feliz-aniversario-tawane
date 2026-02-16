@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma surpresa para você...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            overflow: hidden;
+        }
+
+        /* Botão de Surpresa */
+        #btn-surpresa {
+            padding: 20px 40px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 10;
+        }
+
+        #btn-surpresa:hover {
+            transform: scale(1.1);
+            background-color: #ad1457;
+        }
+
+        /* Container da Mensagem (Escondido inicialmente) */
+        .container {
+            display: none; /* Escondido */
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            animation: slideUp 1.2s ease-out;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+        }
+
+        .text-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .footer-note {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ad1457;
+            margin-top: 20px;
+        }
+
+        /* Corações ao fundo */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            .text-content { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="heart-container"></div>
+
+    <button id="btn-surpresa" onclick="revelarMensagem()">Clique aqui, amor ❤️</button>
+
+    <div class="container" id="conteudo">
+        <h1>Feliz Aniversário!</h1>
+        
+        <div class="text-content">
+            <p><strong>Feliz aniversário, meu amor.</strong></p>
+            <p>Hoje o mundo acordou diferente, porque foi o dia em que ele ganhou você. E, sendo bem sincero, eu também ganhei o meu mundo no dia em que você entrou na minha vida.</p>
+            <p>Eu poderia falar de mil qualidades suas, mas nenhuma palavra conseguiria explicar o que eu sinto quando você sorri, quando fala do nada, quando faz aqueles jeitinhos que só você tem. Você é luz, é calma no meio do caos, é aquele pensamento bom que aparece no meio do dia e muda tudo.</p>
+            <p>Que nesse novo ano da sua vida você realize cada sonho, conquiste cada meta e receba em dobro tudo o que você espalha por aí — carinho, amor e alegria. E se depender de mim, vou estar do seu lado em cada passo, comemorando cada vitória e segurando sua mão nos dias difíceis.</p>
+            <p>Eu te amo. E amar você é, sem dúvida, a melhor coisa que me aconteceu.</p>
+        </div>
+
+        <div class="footer-note">
+            Feliz vida, minha menina 💫✨
+        </div>
+    </div>
+
+    <script>
+        function revelarMensagem() {
+            // Esconde o botão
+            document.getElementById('btn-surpresa').style.display = 'none';
+            // Mostra o conteúdo
+            const conteudo = document.getElementById('conteudo');
+            conteudo.style.display = 'block';
+            
+            // Começa a soltar corações
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-20px';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.innerHTML = '❤️';
+            heart.style.opacity = Math.random();
+            heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            
+            document.getElementById('heart-container').appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to { transform: translateY(105vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
